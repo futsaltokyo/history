@@ -23,5 +23,14 @@ As such, `libev` is required, [as an external dependency](https://github.com/jon
 $ FUTSALTOKYO_ENV=dev && pip install -r requirements/$FUTSALTOKYO_ENV.txt
 ```
 
+### Environment Variables
+
+Required environment variables:
+
+| name | remarks |
+| --- | --- |
+| `MEETUP_API_KEY` | your Meetup API key |
+| `MEETUP_GROUP_NAME` | your Meetup group name, `Futsal-Tokyo` for example |ßßßßß
+
 TODO
 
