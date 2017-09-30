@@ -1,14 +1,18 @@
 language: python
 python:
   - "3.6"
+services:
+  - postgresql
 env:
   - ENV=test
 addons:
   apt:
     packages:
       libev-dev
+before_script:
+  - psql -c 'CREATE DATABASE history_test' -U postgres
+  - psql -d history_test -f sql/migrations.sql
 install:
   - pip install -r requirements/$ENV.txt
 script:
   - flake8 .
-  - pytest

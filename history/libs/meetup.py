@@ -9,6 +9,21 @@ import history.libs.exceptions as exceptions
 
 class Client:
 
+    REQUIRED_FIELDS_EVENT = {
+        'id': int,
+        'name': str,
+        'created': int,
+        'duration': int,
+        'time': int,
+        'venue.id': int,
+        'fee': dict,
+        'rsvp_limit': int
+    }
+
+    REQUIRED_FIELDS_RSVP = {
+        'member': dict
+    }
+
     def __init__(self, api_key=None, group_name=None):
         self.api_key = api_key or os.getenv('MEETUP_API_KEY')
         self.group_name = group_name or os.getenv('MEETUP_GROUP_NAME')
@@ -35,18 +50,35 @@ class Client:
         else:
             raise exceptions.MeetupAPIException()
 
-    def past_events(self):
-        return self.events(event_status='past')
+    def past_events(self, required_fields=None):
+        return self.events(
+            required_fields=required_fields,
+            event_status='past'
+        )
 
-    def events(self, event_status=None):
+    def events(self, required_fields=None, event_status=None):
 
         url = '/{.group_name}/events'.format(self)
 
+        params = {'desc': True}
+
+        if not required_fields:
+            required_fields = self.REQUIRED_FIELDS_EVENT.keys()
+        params['only'] = ','.join(required_fields)
+
         if event_status:
-            params = {
-                'status': 'past'
-            }
-        else:
-            params = None
+            params['status'] = event_status
+
+        return self._req(url, params=params)
+
+    def event_rsvp(self, event_id, required_fields=None):
+
+        url = '/{0.group_name}/events/{1}/rsvps'.format(self, event_id)
+
+        params = {}
+
+        if not required_fields:
+            required_fields = self.REQUIRED_FIELDS_RSVP.keys()
+        params['only'] = ','.join(required_fields)
 
         return self._req(url, params=params)
