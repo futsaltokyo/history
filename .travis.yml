@@ -3,7 +3,12 @@ python:
   - "3.6"
 env:
   - ENV=test
+addons:
+  apt:
+    packages:
+      libev-dev
 install:
   - pip install -r requirements/$ENV.txt
 script:
   - flake8 .
+  - pytest

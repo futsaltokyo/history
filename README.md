@@ -1,6 +1,6 @@
 # History
 
-Retrieves your [Meetup](http://meetup.com) group's past events and generates a database.
+:date: Retrieves your [Meetup](http://meetup.com) group's past events and generates a database.
 
 ## Motivation
 
