@@ -1,14 +1,25 @@
 import hug
 
-import history.controllers.health as health_ctrl
-import history.controllers.history as history_ctrl
+from history.models import DB
+from history.controllers import health
+from history.controllers import history
+
+DB.bind(provider='postgres', database='history')
+DB.generate_mapping(create_tables=False)
 
 
 @hug.extend_api('/health')
-def health():
-    return [health_ctrl]
+def health_endpoints():
+    return [health]
 
 
 @hug.extend_api('/history')
-def history():
-    return [history_ctrl]
+def history_endpoints():
+    return [history]
+
+def run():
+    history.latest()
+
+
+if __name__ == '__main__':
+    run()

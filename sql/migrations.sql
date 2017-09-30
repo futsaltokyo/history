@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS events (
   duration INTEGER,
   rsvp_limit SMALLINT,
   started TIMESTAMP,
-  venue_id BIGINT NOT NULL
+  venue_id BIGINT NOT NULL,
+  fee NUMERIC(10, 4) NOT NULL DEFAULT 0,
+  currency CHAR(3) NOT NULL DEFAULT 'JPY'
 );
 
 CREATE TABLE IF NOT EXISTS members (
