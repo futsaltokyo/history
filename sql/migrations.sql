@@ -10,6 +10,9 @@ CREATE TABLE IF NOT EXISTS events (
   currency CHAR(3) NOT NULL DEFAULT 'JPY'
 );
 
+CREATE INDEX IF NOT EXISTS events_started_idx ON events(started);
+CREATE INDEX IF NOT EXISTS events_venue_id_idx ON events(venue_id);
+
 CREATE TABLE IF NOT EXISTS members (
   id BIGINT PRIMARY KEY,
   name TEXT NOT NULL,

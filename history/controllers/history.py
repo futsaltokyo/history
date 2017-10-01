@@ -4,16 +4,18 @@ import hug
 
 from history.services.history import Service as HistoryService
 from history.services.event import Service as EventService
+from history.services.member import Service as MemberService
 
 
-@hug.get('/')
+@hug.get('/stats')
+@hug.cli()
 def stats():
     return {
         'events': {
             'total': EventService().total_events()
         },
         'members': {
-            'total': 0
+            'total': MemberService().total_members()
         },
         'meta': {
             'last_indexed': int(timestamp())
@@ -21,9 +23,12 @@ def stats():
     }
 
 
-@hug.get('/latest')
-def latest():
-
-    HistoryService().dump()
-
-    return {'status': 'ok'}
+@hug.get('/export')
+@hug.cli()
+def export():
+    try:
+        HistoryService().dump()
+    except Exception as e:
+        return {'status': 'error', 'message': e}
+    else:
+        return {'status': 'ok'}

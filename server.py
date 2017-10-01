@@ -17,9 +17,6 @@ def health_endpoints():
 def history_endpoints():
     return [history]
 
-def run():
-    history.latest()
-
 
 if __name__ == '__main__':
-    run()
+    history.stats.interface.cli()

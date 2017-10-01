@@ -71,4 +71,10 @@ class Member(DB.Entity, BaseModel):
     _table_ = 'members'
     id = pony.orm.PrimaryKey(int)
     name = pony.orm.Required(str)
-    image_url = pony.orm.Required(str)
+    image_url = pony.orm.Optional(str)
+
+    _TYPE_MAP = {
+        'id': (int, ['member', 'id']),
+        'name': (str, ['member', 'name']),
+        'image_url': (str, 'thumb_link')
+    }

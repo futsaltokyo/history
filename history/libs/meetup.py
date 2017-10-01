@@ -48,7 +48,7 @@ class Client:
         if 200 <= resp.status_code < 400:
             return resp.json()
         else:
-            raise exceptions.MeetupAPIException()
+            raise exceptions.MeetupAPIException(resp.text)
 
     def past_events(self, required_fields=None):
         return self.events(
