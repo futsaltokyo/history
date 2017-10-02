@@ -1,10 +1,24 @@
+import os
+
 import hug
 
 from history.models import DB
 from history.controllers import health
 from history.controllers import history
 
-DB.bind(provider='postgres', database='history')
+
+def db_settings():
+    return {
+        'provider': 'postgres',
+        'host': os.getenv('DB_HOST', '127.0.0.1'),
+        'port': int(os.getenv('DB_PORT', 5432)),
+        'user': os.getenv('DB_USER'),
+        'password': os.getenv('DB_PASSWORD'),
+        'database': os.getenv('DB_NAME', 'history')
+    }
+
+
+DB.bind(**db_settings())
 DB.generate_mapping(create_tables=False)
 
 
@@ -16,7 +30,3 @@ def health_endpoints():
 @hug.extend_api('/history')
 def history_endpoints():
     return [history]
-
-
-if __name__ == '__main__':
-    history.stats.interface.cli()

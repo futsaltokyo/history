@@ -9,6 +9,8 @@ import history.libs.exceptions as exceptions
 
 class Client:
 
+    THROTTLE_WAIT_TIME_SEC = 0.1
+
     REQUIRED_FIELDS_EVENT = {
         'id': int,
         'name': str,
