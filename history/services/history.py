@@ -16,6 +16,7 @@ class Service:
 
     def queue_dump(self):
         rds = Redis(**redis_settings())
+
         q = Queue(connection=rds)
         q.enqueue(self.dump, MeetupClient(), db_settings())
 

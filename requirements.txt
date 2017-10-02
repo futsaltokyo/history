@@ -1,0 +1,7 @@
+hug==2.3.0
+gunicorn==19.7.1
+requests>=2.18.4
+psycopg2==2.7.3.1
+pony==0.7.2
+redis==2.10.6
+rq==0.8.2
