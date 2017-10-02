@@ -15,13 +15,13 @@ predictions for the organizers of newer events.
 
 ### Dependencies
 
-We use [Bjoern](https://github.com/jonashaag/bjoern) to serve our WSGI application (built with [Hug framework]()).
-
-As such, `libev` is required, [as an external dependency](https://github.com/jonashaag/bjoern/wiki/Installation#libev).
+We use [Gunicorn]() to serve our WSGI application (built with [Hug framework]()).
 
 However, if you are intending to use this for development purpose, Hug has a built-in development server, batteries included.
 
-For persistence, we assume you would be using a PostgreSQL backend as well.
+For persistence, we assume you would be using [PostgreSQL](https://www.postgresql.org/download/) as well.
+
+We also use [Redis](https://redis.io/download) as the backend store for managing background tasks (dumping API results into tables).
 
 
 ```shell
@@ -38,10 +38,14 @@ Required environment variables:
 | `MEETUP_GROUP_NAME` | your Meetup group name, `Futsal-Tokyo` for example |
 | `DB_NAME` | your database name, defaults to `history` |
 | `DB_HOST` | your database host, defaults to `127.0.0.1` |
-| `DB_PORT` | your database password, defaults to `5432` |
+| `DB_PORT` | your database port, defaults to `5432` |
 | `DB_USER` | your database username |
 | `DB_PASSWORD` | your database password, if any |
+| `REDIS_NAME` | your database name, defaults to `history` |
+| `REDIS_HOST` | your Redis host, defaults to `127.0.0.1` |
+| `REDIS_PORT` | your Redis port, defaults to `6379`  |
+| `REDIS_USER` | your Redis username |
+| `REDIS_PASSWORD` | your Redis password, if any |
 
 
 TODO
-

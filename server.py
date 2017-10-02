@@ -1,21 +1,9 @@
-import os
-
 import hug
 
 from history.models import DB
+from history.config import db_settings
 from history.controllers import health
 from history.controllers import history
-
-
-def db_settings():
-    return {
-        'provider': 'postgres',
-        'host': os.getenv('DB_HOST', '127.0.0.1'),
-        'port': int(os.getenv('DB_PORT', 5432)),
-        'user': os.getenv('DB_USER'),
-        'password': os.getenv('DB_PASSWORD'),
-        'database': os.getenv('DB_NAME', 'history')
-    }
 
 
 DB.bind(**db_settings())

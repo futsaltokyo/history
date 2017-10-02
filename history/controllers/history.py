@@ -27,8 +27,11 @@ def stats():
 @hug.cli()
 def export():
     try:
-        HistoryService().dump()
+        HistoryService().queue_dump()
     except Exception as e:
         return {'status': 'error', 'message': e}
     else:
-        return {'status': 'ok'}
+        return {
+            'status': 'ok',
+            'message': 'task enqueued. check /history/stats for progress.'
+        }
