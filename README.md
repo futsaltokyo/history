@@ -44,8 +44,7 @@ Required environment variables:
 | `REDIS_NAME` | your database name, defaults to `history` |
 | `REDIS_HOST` | your Redis host, defaults to `127.0.0.1` |
 | `REDIS_PORT` | your Redis port, defaults to `6379`  |
-| `REDIS_USER` | your Redis username |
 | `REDIS_PASSWORD` | your Redis password, if any |
 
-
-TODO
+We use Heroku to deploy. With Heroku, we can add add-ons for PostgreSQL and Redis.
+Simply obtain the config for PostgreSQL and Redis and set them as env vars as above.
