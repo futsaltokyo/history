@@ -1,0 +1,43 @@
+version: 2.1
+
+parameters:
+  is-setup:
+    type: boolean
+    default: true
+
+orbs:
+  continuation: circleci/continuation@1.0.0
+
+setup: << pipeline.parameters.is-setup >>
+
+executors:
+  base:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+
+jobs:
+  setup:
+    executor: base
+    steps:
+      - checkout
+      - continuation/continue:
+          configuration_path: .circleci/config.yml
+          parameters: '{"is-setup": false}'
+  done:
+    executor: base
+    steps:
+      - run: echo done
+
+workflows:
+  setup:
+    when: << pipeline.parameters.is-setup >>
+    jobs:
+      - setup
+  cont:
+    when:
+      not: << pipeline.parameters.is-setup >>
+    jobs:
+      - done
+          
+      
